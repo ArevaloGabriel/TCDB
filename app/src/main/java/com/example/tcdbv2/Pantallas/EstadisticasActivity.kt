@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -28,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
@@ -51,16 +53,25 @@ class EstadisticasActivity : ComponentActivity() {
     @Preview
     @Composable
     fun PantallaEstadisticas() {
+        val listaComposables: List<@Composable () -> Unit> = listOf(
+            { Goleadores() },
+            //  { Menu() },
+            { Amonestados()},
+            { Expulsados()},
+
+        )
+
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
             // Contenido principal
-            Column(
+            LazyColumn(
                 modifier = Modifier.weight(1f)
             ) {
-                Goleadores()
-                Amonestados()
-
+                items(listaComposables.size) { index ->
+                    Spacer(modifier = Modifier.padding(5.dp))
+                    listaComposables[index]()
+                }
             }
             BottomBar()
         }}
@@ -87,6 +98,7 @@ class EstadisticasActivity : ComponentActivity() {
         ) {
             Column(
                 modifier = Modifier
+                    .background(color =Color.Blue)
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState()) // Hacer la parte de los jugadores desplazable
             ) {
@@ -195,7 +207,8 @@ class EstadisticasActivity : ComponentActivity() {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(rememberScrollState()) // Hacer la parte de los jugadores desplazable
+                    .verticalScroll(rememberScrollState())
+                    .background(color =Color.Blue)// Hacer la parte de los jugadores desplazable
             ) {
                 Text(
                     text = "AMONESTADOS",
@@ -284,6 +297,114 @@ class EstadisticasActivity : ComponentActivity() {
             }
         }
     }
+    @Preview
+    @Composable
+    fun Expulsados(){
+        val listaJugadores = JugadoresRepositorio.get1()
+        val expulsados= JugadoresRepositorio.DevolverJugadoresExpulsados(listaJugadores)
+
+        Box(
+            modifier = Modifier
+                .height(400.dp)
+                .padding(10.dp)
+                .background(color = LightGray, shape = RoundedCornerShape(30.dp))
+                .clip(RoundedCornerShape(7.dp))
+
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .background(color =Color.Blue)// Hacer la parte de los jugadores desplazable
+            ) {
+                Text(
+                    text = "EXPULSADOS",
+                    color = White,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(35.dp)
+                        .padding(5.dp),
+                    textAlign = TextAlign.Center
+                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(30.dp)
+                        .background(Color(0xFF68AECE))
+                        .border(width = 0.5.dp, color = Color.Black)
+                ) {
+                    Text(
+                        text = "POS",
+                        textAlign = TextAlign.Center,
+                        color = Color.White,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(30.dp)
+                    )
+                    Text(
+                        text = "JUGADOR",
+                        textAlign = TextAlign.Center,
+                        color = Color.White,
+                        modifier = Modifier
+                            .weight(3f)
+                            .height(30.dp)
+                    )
+                    Text(
+                        text = "ROJAS",
+                        textAlign = TextAlign.Center,
+                        color = Color.White,
+                        modifier = Modifier
+                            .weight(3f)
+                            .height(30.dp)
+                    )
+                }
+                var posicion = 0
+                JugadoresRepositorio.OrdenarJugadoresPorExpulsiones(expulsados as MutableList<Jugador>)
+                expulsados.forEach { jugador ->
+                    val logoEquipo = ObtenerLogoPorJugador(jugador)
+                    posicion += 1
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(35.dp)
+                            .background(Color(0xFFBAE1F3))
+                            .border(width = 0.5.dp, color = Color.White)
+                            .clickable {}
+                            .padding(horizontal = 5.dp, vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = posicion.toString(),
+                            textAlign = TextAlign.Center,
+                            color = Color.White,
+                            modifier = Modifier
+                                .weight(1f)
+                                .background(Color(0xFF68AECE))
+                                .height(30.dp)
+                        )
+                        Image(
+                            modifier = Modifier
+                                .width(30.dp)
+                                .height(30.dp),
+                            painter = painterResource(id = logoEquipo),
+                            contentDescription = ""
+                        )
+                        Text(
+                            modifier = Modifier.weight(3f),
+                            text = "${jugador.nombre} ${jugador.apellido}",
+                            textAlign = TextAlign.Center
+                        )
+                        Text(
+                            modifier = Modifier.weight(3f),
+                            text = " ${jugador.amonestaciones}",
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }
+        }
+    }
+
 
 
     @Preview

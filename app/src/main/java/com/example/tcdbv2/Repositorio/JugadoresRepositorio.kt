@@ -8,10 +8,10 @@ object JugadoresRepositorio {
     private var listaJugadores: MutableList<Jugador> = mutableListOf()
 
     init {
-        listaJugadores.add(Jugador("gabriel ","arevalo",30732787,15, EquiposEnum.PHILADELFIA, 2,0,8, R.drawable.logo ))
-        listaJugadores.add(Jugador("jorge ","motto",225457845,11, EquiposEnum.PHILADELFIA, 1,0,6, R.drawable.avatar ))
+        listaJugadores.add(Jugador("gabriel ","arevalo",30732787,15, EquiposEnum.PHILADELFIA, 2,1,8, R.drawable.logo ))
+        listaJugadores.add(Jugador("jorge ","motto",225457845,11, EquiposEnum.PHILADELFIA, 1,2,6, R.drawable.avatar ))
         listaJugadores.add(Jugador("leo  ","trevia",2214521,10, EquiposEnum.PHILADELFIA, 3,0,4, R.drawable.avatar ))
-        listaJugadores.add(Jugador("alejo ","garcia",2241578,7, EquiposEnum.PHILADELFIA, 4,0,0, R.drawable.avatar ))
+        listaJugadores.add(Jugador("alejo ","garcia",2241578,7, EquiposEnum.PHILADELFIA, 4,1,0, R.drawable.avatar ))
         listaJugadores.add(Jugador("marcelo ","alvarez",3365874,12, EquiposEnum.PHILADELFIA, 1,0,0, R.drawable.avatar ))
         listaJugadores.add(Jugador("roman ","arevalo",39732787,15, EquiposEnum.PHILADELFIA, 2,0,8, R.drawable.logo ))
         listaJugadores.add(Jugador("jorge ","motto",225455845,11, EquiposEnum.PHILADELFIA, 6,0,6, R.drawable.avatar ))
@@ -67,6 +67,12 @@ object JugadoresRepositorio {
     }
     fun DevolverJugadoresAmonestados(listaJugadores: MutableList<Jugador>): List<Jugador> {
         return listaJugadores.filter { it.amonestaciones > 0 }
+    }
+    fun DevolverJugadoresExpulsados(listaJugadores: MutableList<Jugador>): List<Jugador> {
+        return listaJugadores.filter { it.expulsiones > 0 }
+    }
+    fun OrdenarJugadoresPorExpulsiones(listaJugadores:MutableList<Jugador>) {
+        return listaJugadores.sortByDescending { it.expulsiones }
     }
     fun OrdenarJugadoresPorAmarillas(listaJugadores:MutableList<Jugador>) {
         return listaJugadores.sortByDescending { it.amonestaciones }
