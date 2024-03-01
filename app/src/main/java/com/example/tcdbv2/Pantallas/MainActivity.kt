@@ -210,7 +210,7 @@ class MainActivity : ComponentActivity() {
                                 .background(Color(0xFFBAE1F3))
                                 .border(width = 0.5.dp, color = Color.White)
 
-                                .clickable {/*
+                                .clickable {
                                     startActivity(
                                         Intent(
                                             this@MainActivity,
@@ -218,7 +218,7 @@ class MainActivity : ComponentActivity() {
                                         )
                                             .putExtra("Equipo", equipo.nombre.toString())
                                             .putExtra("logoEquipo", equipo.logo)
-                                    )*/ }
+                                    ) }
                             , verticalAlignment =  Alignment.CenterVertically
                         ) {
                             Text(text ="  "+ posicion.toString(), color =Color.White ,modifier= Modifier
@@ -250,7 +250,7 @@ class MainActivity : ComponentActivity() {
     @Preview
     @Composable
     fun proximosPartidos() {
-        val fixture = FixtureRepositorio.DevolverFecha(1)
+        val fecha = FixtureRepositorio.DevolverFecha(1)
         Column() {
             Box(
                 modifier = Modifier
@@ -304,8 +304,8 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    if (fixture != null) {
-                        fixture.listaPartidos.forEach { partido ->
+                    if (fecha != null) {
+                        fecha.listaPartidos.forEach { partido ->
 
                             Row(
                                 modifier = Modifier
@@ -321,7 +321,7 @@ class MainActivity : ComponentActivity() {
                                                 this@MainActivity,
                                                 DatosDelPartidoActivity::class.java
                                             )
-                                                .putExtra("idFecha",fixture.id)
+                                                .putExtra("idFecha",fecha.id)
                                                 .putExtra("idPartido", partido.id)
                                         )
 

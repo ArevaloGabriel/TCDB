@@ -59,16 +59,11 @@ object ListaEquiposRepositorio {
         return equipo?.logo ?: R.drawable.gol // Si no se encuentra el logo, retorna un logo predeterminado
     }
     fun ObtenerLogoPorEquipo(equipo: String): Int {
-        val equipo = listaEquipos.firstOrNull { it.nombre.equals(equipo) }
+        val equipo = listaEquipos.firstOrNull { it.nombre.toString() == equipo }
         return equipo?.logo ?: R.drawable.gol // Si no se encuentra el logo, retorna un logo predeterminado
     }
 
 
-   /* fun ordenarEquiposPorPuntos(listaequipos:MutableList<Equipo>) {
-        return listaequipos.sortByDescending { it.puntos
-
-        }
-    }*/
    fun ordenarEquiposPorPuntos(listaequipos: MutableList<Equipo>) {
        listaequipos.sortWith(compareByDescending<Equipo> { it.puntos }
            .thenByDescending { it.golesAFavor-it.golesEnContra }.thenByDescending { it.partidoGanado })

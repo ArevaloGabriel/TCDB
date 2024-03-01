@@ -23,6 +23,11 @@
             android:label="@string/title_activity_lista_de_jugadores"
             android:theme="@style/Theme.TCDBV2" />
         <activity
+            android:name=".Pantallas.DatosDelPartidoActivity"
+            android:exported="false"
+            android:label="DatosDelPartidoActivity"
+            android:theme="@style/Theme.TCDBV2" />
+        <activity
             android:name=".Pantallas.ListaDeEquiposActivity"
             android:exported="false"
             android:label="@string/title_activity_lista_de_equipos"
