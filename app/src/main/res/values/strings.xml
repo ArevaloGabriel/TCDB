@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TCDBV2</string>
+    <string name="title_activity_datos_del_partido">DatosDelPartidoActivity</string>
+    <string name="title_activity_fechas">FechasActivity</string>
+    <string name="title_activity_jugador">JugadorActivity</string>
+    <string name="title_activity_lista_de_equipos">ListaDeEquiposActivity</string>
+    <string name="title_activity_lista_de_jugadores">ListaDeJugadoresActivity</string>
+    <string name="title_activity_estadisticas">EstadisticasActivity</string>
+</resources>
