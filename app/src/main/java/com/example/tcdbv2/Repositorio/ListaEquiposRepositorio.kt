@@ -20,13 +20,13 @@ object ListaEquiposRepositorio {
             EquiposEnum.TORONTO,  R.drawable.toronto   ,0,2,2,0,3,4,2,TraerJugadoresDeEquipo(
                 EquiposEnum.TORONTO) ))
         listaEquipos.add(Equipo(
-            EquiposEnum.VANCOUVER,  R.drawable.vancouver,0,2,1,1,0,0,4,TraerJugadoresDeEquipo(
+            EquiposEnum.VANCOUVER,  R.drawable.vancouver,0,2,4,1,0,0,4,TraerJugadoresDeEquipo(
                 EquiposEnum.VANCOUVER)))
         listaEquipos.add(Equipo(
             EquiposEnum.DCUNITED, R.drawable.dcunited,0,2,0,0,0,3,5,TraerJugadoresDeEquipo(
                 EquiposEnum.DCUNITED)))
         listaEquipos.add(Equipo(
-            EquiposEnum.COLUMBUS, R.drawable.columbus,0,2,0,0,1,2,1, TraerJugadoresDeEquipo(
+            EquiposEnum.COLUMBUS, R.drawable.columbus,0,2,5,0,1,2,1, TraerJugadoresDeEquipo(
                 EquiposEnum.COLUMBUS)))
         listaEquipos.add(Equipo(
             EquiposEnum.CINCINATI, R.drawable.cincinati,0,2,0,0,0,4,9,TraerJugadoresDeEquipo(
